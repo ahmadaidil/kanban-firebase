@@ -98,6 +98,7 @@
         </div>
       </div>
     </div>
+    <router-link :to="'/add'" class="btn btn-primary" id="btn-add"><span class="glyphicon glyphicon-plus"></span></router-link>
   </div>
 </template>
 
@@ -110,5 +111,13 @@ export default {
 <style scoped>
 #bodycontent {
   border: 1px solid #485563;
+}
+
+#btn-add {
+  position: fixed;
+  float: top;
+  top: 45px;
+  left: 0px;
+  margin: 0;
 }
 </style>
