@@ -1,6 +1,6 @@
 # kanban-firebase
 
-> A Vue.js and firebase project
+> A vuefire project [link deploy] (https://aedel-kanban-5e37b.firebaseapp.com/)
 
 ## Build Setup
 
