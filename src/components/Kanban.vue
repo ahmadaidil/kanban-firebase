@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-4">
-        <div class="panel panel-warning">
+        <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title">Todo</h3>
           </div>
@@ -13,12 +13,20 @@
               <div class="panel-body" id="bodycontent">
                 Panel content
                 <div class="content-fluid">
-                  <div class="row">
+                  <div class="row visible-md visible-lg">
                     <div class="col-md-6">
                       
                     </div>
                     <div class="col-md-6">
                       <button class="btn btn-default"><span class="glyphicon glyphicon-chevron-right"></span></button>
+                    </div>
+                  </div>
+                  <div class="row visible-sm visible-xs">
+                    <div class="col-md-6">
+                      
+                    </div>
+                    <div class="col-md-6">
+                      <button class="btn btn-default"><span class="glyphicon glyphicon-menu-down"></span></button>
                     </div>
                   </div>
                 </div>
@@ -28,7 +36,7 @@
         </div>
       </div>
       <div class="col-md-4">
-        <div class="panel panel-primary">
+        <div class="panel panel-warning">
           <div class="panel-heading">
             <h3 class="panel-title">Doing</h3>
           </div>
@@ -39,12 +47,20 @@
               <div class="panel-body" id="bodycontent">
                 Panel content
                 <div class="content-fluid">
-                  <div class="row">
+                  <div class="row visible-md visible-lg">
                     <div class="col-md-6">
                       <button class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span></button>
                     </div>
                     <div class="col-md-6">
                       <button class="btn btn-default"><span class="glyphicon glyphicon-chevron-right"></span></button>
+                    </div>
+                  </div>
+                  <div class="row visible-sm visible-xs">
+                    <div class="col-md-6">
+                      <button class="btn btn-default"><span class="glyphicon glyphicon-menu-up"></span></button>
+                    </div>
+                    <div class="col-md-6">
+                      <button class="btn btn-default"><span class="glyphicon glyphicon-menu-down"></span></button>
                     </div>
                   </div>
                 </div>
@@ -65,9 +81,14 @@
               <div class="panel-body" id="bodycontent">
                 Panel content
                 <div class="content-fluid">
-                  <div class="row">
+                  <div class="row visible-md visible-lg">
                     <div class="col-md-6">
                       <button class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span></button>
+                    </div>
+                  </div>
+                  <div class="row visible-sm visible-xs">
+                    <div class="col-md-6">
+                      <button class="btn btn-default"><span class="glyphicon glyphicon-menu-up"></span></button>
                     </div>
                   </div>
                 </div>
