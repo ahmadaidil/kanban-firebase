@@ -8,14 +8,15 @@
           </div>
           <div class="panel-body">
             <div class="panel panel-default">
+              <h4 id="warning-msg" v-if="msg">{{msg}}</h4>
               <div class="panel-heading">
-                <input type="text" class="form-control" v-model="heading" placeholder="Heading">
+                <input type="text" class="form-control" v-model="newTask.heading" placeholder="Heading">
               </div>
               <div class="panel-body" id="bodycontent">
-                <textarea class="form-control" rows="3" v-model="content" placeholder="Content"></textarea>
+                <textarea class="form-control" rows="3" v-model="newTask.content" placeholder="Content"></textarea>
               </div>
             </div>
-            <button class="btn btn-info">CREATE</button>
+            <button class="btn btn-info" @click="submit">CREATE</button>
           </div>
         </div>
       </div>
@@ -25,8 +26,28 @@
 </template>
 
 <script>
-export default {
 
+export default {
+  data() {
+    return {
+      newTask: {
+        heading: null,
+        content: null,
+        status: 1,
+      },
+      msg: null,
+    };
+  },
+  methods: {
+    submit() {
+      if (this.newTask.heading == null || this.newTask.heading === '' || this.newTask.content == null || this.newTask.content === '') {
+        this.msg = 'heading and content can\'t null';
+      } else {
+        this.$tasksRef.push(this.newTask);
+        this.$router.push('/');
+      }
+    },
+  },
 };
 </script>
 
@@ -45,5 +66,10 @@ export default {
   top: 45px;
   left: 0px;
   margin: 0;
+}
+
+#warning-msg {
+  color:red;
+  margin-top:-5px;
 }
 </style>

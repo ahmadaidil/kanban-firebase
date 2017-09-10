@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <h1>aedel Kanban</h1>
     <router-view></router-view>
   </div>
 </template>
@@ -17,11 +16,5 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css?family=Libre+Barcode+39+Text');
-h1 {
-  color: #e3e3e3;
-  margin-top: -15px;
-  margin-bottom: 35px;
-  font-family: 'Libre Barcode 39 Text', cursive;
-}
+
 </style>

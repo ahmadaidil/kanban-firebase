@@ -11,18 +11,17 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
       component: Home,
       children: [
         {
           path: '',
           component: Kanban,
         },
-        {
-          path: 'add',
-          component: Form,
-        },
       ],
+    },
+    {
+      path: '/add',
+      component: Form,
     },
   ],
 });

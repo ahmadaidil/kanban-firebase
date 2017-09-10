@@ -7,18 +7,18 @@
             <h3 class="panel-title">Todo</h3>
           </div>
           <div class="panel-body">
-            <div class="panel panel-default">
-              <a href="" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
-              <div class="panel-heading" id="headcontent">Panel heading</div>
-              <div class="panel-body" id="bodycontent">
-                Panel content
+            <div class="panel panel-default" v-for="(task, index) in tasks" :key="index" v-if="task.status===1">
+              <a @click="remove(index)" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+              <div class="panel-heading">{{task.heading}}</div>
+              <div class="panel-body todo" id="bodycontent">
+                {{task.content}}
                 <div class="content-fluid">
                   <div class="row visible-md visible-lg">
                     <div class="col-md-6">
                       
                     </div>
                     <div class="col-md-6">
-                      <button class="btn btn-default"><span class="glyphicon glyphicon-chevron-right"></span></button>
+                      <button @click="next(task, index)" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right"></span></button>
                     </div>
                   </div>
                   <div class="row visible-sm visible-xs">
@@ -26,7 +26,7 @@
                       
                     </div>
                     <div class="col-md-6">
-                      <button class="btn btn-default"><span class="glyphicon glyphicon-menu-down"></span></button>
+                      <button @click="next(task, index)" class="btn btn-default"><span class="glyphicon glyphicon-menu-down"></span></button>
                     </div>
                   </div>
                 </div>
@@ -41,26 +41,26 @@
             <h3 class="panel-title">Doing</h3>
           </div>
           <div class="panel-body">
-            <div class="panel panel-default">
-              <a href="" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
-              <div class="panel-heading">Panel heading</div>
-              <div class="panel-body" id="bodycontent">
-                Panel content
+            <div class="panel panel-default" v-for="(task, index) in tasks" :key="index" v-if="task.status===2">
+              <a @click="remove(index)" class="pull-right doing"><span class="glyphicon glyphicon-remove"></span></a>
+              <div class="panel-heading">{{task.heading}}</div>
+              <div class="panel-body doing" id="bodycontent">
+                {{task.content}}
                 <div class="content-fluid">
                   <div class="row visible-md visible-lg">
                     <div class="col-md-6">
-                      <button class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span></button>
+                      <button @click="prev(task, index)" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span></button>
                     </div>
                     <div class="col-md-6">
-                      <button class="btn btn-default"><span class="glyphicon glyphicon-chevron-right"></span></button>
+                      <button @click="next(task, index)" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right"></span></button>
                     </div>
                   </div>
                   <div class="row visible-sm visible-xs">
                     <div class="col-md-6">
-                      <button class="btn btn-default"><span class="glyphicon glyphicon-menu-up"></span></button>
+                      <button @click="prev(task, index)" class="btn btn-default"><span class="glyphicon glyphicon-menu-up"></span></button>
                     </div>
                     <div class="col-md-6">
-                      <button class="btn btn-default"><span class="glyphicon glyphicon-menu-down"></span></button>
+                      <button @click="next(task, index)" class="btn btn-default"><span class="glyphicon glyphicon-menu-down"></span></button>
                     </div>
                   </div>
                 </div>
@@ -75,20 +75,20 @@
             <h3 class="panel-title">Done</h3>
           </div>
           <div class="panel-body">
-            <div class="panel panel-default">
-              <a href="" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
-              <div class="panel-heading">Panel heading</div>
-              <div class="panel-body" id="bodycontent">
-                Panel content
+            <div class="panel panel-default" v-for="(task, index) in tasks" :key="index" v-if="task.status===3">
+              <a @click="remove(index)" class="pull-right done"><span class="glyphicon glyphicon-remove"></span></a>
+              <div class="panel-heading">{{task.heading}}</div>
+              <div class="panel-body done" id="bodycontent">
+                {{task.content}}
                 <div class="content-fluid">
                   <div class="row visible-md visible-lg">
                     <div class="col-md-6">
-                      <button class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span></button>
+                      <button @click="prev(task, index)" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span></button>
                     </div>
                   </div>
                   <div class="row visible-sm visible-xs">
                     <div class="col-md-6">
-                      <button class="btn btn-default"><span class="glyphicon glyphicon-menu-up"></span></button>
+                      <button @click="prev(task, index)" class="btn btn-default"><span class="glyphicon glyphicon-menu-up"></span></button>
                     </div>
                   </div>
                 </div>
@@ -104,13 +104,53 @@
 
 <script>
 export default {
-
+  data() {
+    return {
+      tasks: null,
+      keys: null,
+    };
+  },
+  methods: {
+    getTasks() {
+      this.$tasksRef.on('value', (data) => {
+        this.tasks = data.val();
+      });
+    },
+    remove(index) {
+      this.$tasksRef.child(index).remove();
+    },
+    next(task, index) {
+      this.$tasksRef.child(index).update({
+        status: task.status + 1,
+      });
+    },
+    prev(task, index) {
+      this.$tasksRef.child(index).update({
+        status: task.status - 1,
+      });
+    },
+  },
+  mounted() {
+    this.getTasks();
+  },
 };
 </script>
 
 <style scoped>
-#bodycontent {
+#bodycontent  {
   border: 1px solid #485563;
+}
+
+.todo {
+  color: #df691a;
+}
+
+.doing {
+  color: #f0ad4e;
+}
+
+.done {
+  color: #5cb85c
 }
 
 #btn-add {
